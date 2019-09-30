@@ -1,0 +1,12 @@
+
+
+Code Coverage Report:   
+  2019-09-30 16:00:36   
+                        
+ Summary:               
+  Classes: 100.00% (1/1)
+  Methods: 100.00% (2/2)
+  Lines:   100.00% (7/7)
+
+FilesystemTest
+  Methods: 100.00% ( 2/ 2)   Lines: 100.00% (  7/  7)

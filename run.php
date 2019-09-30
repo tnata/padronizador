@@ -4,8 +4,7 @@
 require_once('vendor/autoload.php');
 require_once('bootstrap.php');
  
-// Import classes.
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
+// Import classes
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Stringy\Stringy as Str;
 

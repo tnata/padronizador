@@ -1,0 +1,1 @@
+C:37:"PHPUnit\Runner\DefaultTestResultCache":163:{a:2:{s:7:"defects";a:0:{}s:5:"times";a:2:{s:47:"FilesystemTest::testCanReadInputFolderRecursive";d:0.01;s:41:"FilesystemTest::testCanCountTextFileLines";d:0.002;}}}

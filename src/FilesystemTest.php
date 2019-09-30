@@ -8,13 +8,16 @@ final class FilesystemTest extends TestCase
 {
     public function testCanReadInputFolderRecursive(): void
     {
-        $folders = Standardizer\Filesystem::scanAllDir('input');
-
-        $this->assertIsArray($folders);
+        $this->assertIsArray(
+            Standardizer\Filesystem::scanAllDir('input')
+        );
     }
 
-    public function testCanReadTextFile()
+    public function testCanCountTextFileLines()
     {
-        
+        $this->assertEquals(
+            10,
+            Standardizer\Filesystem::countLines('assets/test.txt')
+        );
     }
 }

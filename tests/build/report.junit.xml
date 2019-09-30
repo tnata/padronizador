@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="src" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.011221">
+    <testsuite name="FilesystemTest" file="/home/padronizador/src/FilesystemTest.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.011221">
+      <testcase name="testCanReadInputFolderRecursive" class="FilesystemTest" classname="FilesystemTest" file="/home/padronizador/src/FilesystemTest.php" line="9" assertions="1" time="0.009507"/>
+      <testcase name="testCanCountTextFileLines" class="FilesystemTest" classname="FilesystemTest" file="/home/padronizador/src/FilesystemTest.php" line="16" assertions="1" time="0.001714"/>
+    </testsuite>
+  </testsuite>
+</testsuites>
