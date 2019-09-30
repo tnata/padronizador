@@ -188,6 +188,7 @@ class ComposerStaticInitf2bfe798000280a86d3f305c24efdbae
     );
 
     public static $classMap = array (
+        'FilesystemTest' => __DIR__ . '/../..' . '/src/FilesystemTest.php',
         'PHPUnit\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert.php',
         'PHPUnit\\Framework\\AssertionFailedError' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Exception/AssertionFailedError.php',
@@ -756,6 +757,10 @@ class ComposerStaticInitf2bfe798000280a86d3f305c24efdbae
         'SebastianBergmann\\Type\\UnknownType' => __DIR__ . '/..' . '/sebastian/type/src/UnknownType.php',
         'SebastianBergmann\\Type\\VoidType' => __DIR__ . '/..' . '/sebastian/type/src/VoidType.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
+        'Standardizer\\Conversor' => __DIR__ . '/../..' . '/src/Conversor.php',
+        'Standardizer\\Filesystem' => __DIR__ . '/../..' . '/src/Filesystem.php',
+        'Standardizer\\Interfaces\\Parser' => __DIR__ . '/../..' . '/src/Interfaces/Parser.php',
+        'Standardizer\\Translators\\Cobranca\\CobrancaTranslator' => __DIR__ . '/../..' . '/src/Parsers/Cadastro.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
         'TheSeer\\Tokenizer\\Exception' => __DIR__ . '/..' . '/theseer/tokenizer/src/Exception.php',
         'TheSeer\\Tokenizer\\NamespaceUri' => __DIR__ . '/..' . '/theseer/tokenizer/src/NamespaceUri.php',

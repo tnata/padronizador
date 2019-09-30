@@ -14,33 +14,6 @@ use Stringy\Stringy as Str;
 $inputFolder = 'input/';
 $outputFolder = 'output/';
 $outputRaw = $outputFolder.'raw/';
-
-function scanAllDir($dir) {
-    $result = [];
-    foreach(scandir($dir) as $filename) {
-        if ($filename[0] === '.') continue;
-        $filePath = $dir . '/' . $filename;
-        if (is_dir($filePath)) {
-            foreach (scanAllDir($filePath) as $childFilename) {
-                $result[] = $filename . '/' . $childFilename;
-            }
-        } else {
-            $result[] = $filename;
-        }
-    }
-    return $result;
-}
-
-function countLines($file) {
-    $linecount = 0;
-    $handle = fopen($file, "r");
-    while(!feof($handle)){
-        fgets($handle); //Needed to advance the file pointer
-        $linecount++;
-    }
-    fclose($handle);
-    return $linecount;
-}
  
 // Read the input folder files and process it
 foreach(scanAllDir($inputFolder) as $inputFile) {
