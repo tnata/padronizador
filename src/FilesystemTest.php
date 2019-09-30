@@ -15,7 +15,6 @@ final class FilesystemTest extends TestCase
 
     public function testCanReadTextFile()
     {
-        # code...
+        
     }
-
 }
