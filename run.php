@@ -210,6 +210,9 @@ foreach(scanAllDir($inputFolder) as $inputFile) {
             // START CADASTRO PARSER
             if ($standardName == 'cadastro') {
                 // Start line parsing
+                $parsedLine['bloco'] = @explode('/', $lineToParse[1])[0];
+                $parsedLine['bloco'] = ($parsedLine['bloco'] == 0) ? '' : $parsedLine['bloco'];
+                $parsedLine['unidade'] = @explode('/', $lineToParse[1])[1];
                 $parsedLine['proprietario_nome'] = @explode('CPF:', $lineToParse[3])[0];
                 $parsedLine['proprietario_cpf/cnpj'] = @explode('CPF:', $lineToParse[3])[1];
                 $parsedLine['proprietario_rg'] = @explode('RG:', $lineToParse[8])[1];
@@ -251,6 +254,9 @@ foreach(scanAllDir($inputFolder) as $inputFile) {
                         $parsedLine['bloco'] = $prevBloco;
                     }
 
+                    // Prevents zeroed for 'bloco'
+                    $parsedLine['bloco'] = ($parsedLine['bloco'] == 0) ? '' : $parsedLine['bloco'];
+
                     $parsedLine['vencimento'] = $lineToParse[8];
                     $parsedLine['nosso_numero'] = $lineToParse[7];
                     // $parsedLine['[RECEITA_APROPRIACAO][0][conta_categoria]'] = ??;
@@ -259,16 +265,15 @@ foreach(scanAllDir($inputFolder) as $inputFile) {
                 }
 
                 if ($mode == 'acordo') {
-                    $parsedLine = [$toWrite];
-                    // $blocoEunidade = explode('-', str_replace('Bl/Unidade: ', '', $lineToParse[0]))[0];
-                    // $parsedLine['unidade'] = explode('/', $blocoEunidade)[1];
-                    // $parsedLine['bloco'] = explode('/', $blocoEunidade)[0];
+                    $blocoEunidade = explode('-', str_replace('Bl/Unidade:', '', $lineToParse[0]))[0];
+                    $parsedLine['unidade'] = explode('/', $blocoEunidade)[1];
+                    $parsedLine['bloco'] = explode('/', $blocoEunidade)[0];
 
-                    // $parsedLine['vencimento'] = $lineToParse[8];
-                    // $parsedLine['nosso_numero'] = $lineToParse[7];
-                    // // $parsedLine['[RECEITA_APROPRIACAO][0][conta_categoria]'] = ??;
-                    // // $parsedLine['[RECEITA_APROPRIACAO][0][complemento]'] = ??;
-                    // $parsedLine['[RECEITA_APROPRIACAO][0][valor]'] = str_replace('??', '', @$lineToParse[11]);
+                    $parsedLine['vencimento'] = $lineToParse[18];
+                    $parsedLine['nosso_numero'] = $lineToParse[21];
+                    // $parsedLine['[RECEITA_APROPRIACAO][0][conta_categoria]'] = ??;
+                    // $parsedLine['[RECEITA_APROPRIACAO][0][complemento]'] = ??;
+                    $parsedLine['[RECEITA_APROPRIACAO][0][valor]'] = str_replace('??', '', @$lineToParse[25]);
                 }
             }
             // END COBRANCA PARSER
