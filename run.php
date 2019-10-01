@@ -78,7 +78,7 @@ foreach(scanAllDir($inputFolder) as $inputFile) {
     // Export to CSV in output
     $writer = IOFactory::createWriter($spreadsheet, "Csv")
     ->setSheetIndex(0)   // Select which sheet to export.
-    ->setDelimiter(',');  // Set delimiter.
+    ->setDelimiter(';.;');  // Set a crazy delimiter.
     
     $outputFile = str_replace($inputFileInfo['extension'], 'csv', $inputFile);
     // Save raw conversion output
@@ -200,7 +200,7 @@ foreach(scanAllDir($inputFolder) as $inputFile) {
             $concatIndex = $lnum;
 
             //Generate line to parse
-            $lineToParse = explode(',', $toWrite);
+            $lineToParse = explode(';.;', $toWrite);
 
             //Create empty indexed array from config fields to implode
             foreach($fieldsToImplode as $field) {
@@ -227,8 +227,8 @@ foreach(scanAllDir($inputFolder) as $inputFile) {
                 }
                 $parsedLine['proprietario_telefone'] = implode(";", $phones);
                 $parsedLine['proprietario_email'] = @explode('e-mail:', $lineToParse[18])[1];
-                $parsedLine['proprietario_endereco'] = @$lineToParse[22];
-                $address = explode('  ', @$lineToParse[26]);
+                $parsedLine['proprietario_endereco'] = str_replace(',', '', @$lineToParse[22]);
+                $address = explode('  ', @$lineToParse[25]);
                 $city = @explode(' - ', @$address[0])[0];
                 $state = @explode(' - ', @$address[0])[1];
 
@@ -259,22 +259,21 @@ foreach(scanAllDir($inputFolder) as $inputFile) {
 
                     $parsedLine['vencimento'] = $lineToParse[8];
                     $parsedLine['nosso_numero'] = $lineToParse[7];
-                    // $parsedLine['[RECEITA_APROPRIACAO][0][conta_categoria]'] = ??;
                     // $parsedLine['[RECEITA_APROPRIACAO][0][complemento]'] = ??;
                     $parsedLine['[RECEITA_APROPRIACAO][0][valor]'] = str_replace('??', '', @$lineToParse[11]);
                 }
 
                 if ($mode == 'acordo') {
                     $blocoEunidade = explode('-', str_replace('Bl/Unidade:', '', $lineToParse[0]))[0];
-                    $parsedLine['unidade'] = explode('/', $blocoEunidade)[1];
-                    $parsedLine['bloco'] = explode('/', $blocoEunidade)[0];
+                    $parsedLine['unidade'] = @explode('/', $blocoEunidade)[1];
+                    $parsedLine['bloco'] = @explode('/', $blocoEunidade)[0];
 
                     $parsedLine['vencimento'] = $lineToParse[18];
                     $parsedLine['nosso_numero'] = $lineToParse[21];
-                    // $parsedLine['[RECEITA_APROPRIACAO][0][conta_categoria]'] = ??;
                     // $parsedLine['[RECEITA_APROPRIACAO][0][complemento]'] = ??;
                     $parsedLine['[RECEITA_APROPRIACAO][0][valor]'] = str_replace('??', '', @$lineToParse[25]);
                 }
+                $parsedLine['[RECEITA_APROPRIACAO][0][conta_categoria]'] = '1.1';
             }
             // END COBRANCA PARSER
 
