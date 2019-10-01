@@ -21,7 +21,7 @@ class Exporter
         // Input file path
         $this->inputFilePath = $inputFilePath;
         // Get file info from file path
-        $this->inputFileInfo = pathinfo($this->inputFilePath);
+        $this->inputFileInfo = Filesystem::getInfo($inputFilePath);
     }
 
     /**

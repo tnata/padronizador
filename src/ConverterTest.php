@@ -8,9 +8,11 @@ final class ConverterTest extends TestCase
 {
     public function testCanICreateAParentConverterInstance(): void
     {
+        // Pass same file as input and raw options
+        $file = 'tests/assets/empty.xls';
         $this->assertInstanceOf(
             Standardizer\Converter::class,
-            (new Standardizer\Converter('tests/assets/empty.xls'))
+            (new Standardizer\Converter($file, $file))
         );        
     }
 }

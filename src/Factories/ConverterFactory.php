@@ -1,27 +1,26 @@
 <?php namespace Standardizer\Factories;
 
-// Thyrd party lib's
-use Stringy\Stringy as Str;
+use Standardizer\Converter;
 
 /**
  * Exporter factory
  */
 class ConverterFactory
 {
-    public static function create($inputFile = null)
+    public static function create(string $inputFilePath, string $rawFilePath)
     {
-        // Define the standard for conversion
-        foreach(config('converters')->get('available') as $config) {
-            if (Str::create($inputFile)->contains($config['name'])) {
-                $array_config = $config;
-            }
-        }
+        // Get the converter config
+        $config = Converter::getConfig($inputFilePath);
 
-        if (!isset($array_config)) {
+        if (!isset($config['class'])) {
             throw new \Exception('Conversor não implementado!');
         }
 
-        $class = 'Standardizer\\Converters\\'.$array_config['class'];
-        return new $class($inputFile, $array_config);
+        if (!file_exists($rawFilePath)) {
+            throw new \Exception('Arquivo raw não encontrado!');
+        }
+
+        $class = 'Standardizer\\Converters\\'.$config['class'];
+        return new $class($inputFilePath, $rawFilePath);
     }
 }

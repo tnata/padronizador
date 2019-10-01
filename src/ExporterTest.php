@@ -5,7 +5,7 @@ declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 
 use Standardizer\Exporter;
-use Standardizer\Factories;
+use Standardizer\Filesystem;
 
 final class ExporterTest extends TestCase
 {
@@ -14,7 +14,10 @@ final class ExporterTest extends TestCase
 
     public function testCanICreateAExporterFromClass() : Exporter
     {
-        $exporter = new Exporter($this->emptyFileToExport);
+        $exporter = new Exporter(
+            $this->emptyFileToExport, 
+            Filesystem::getInfo($this->emptyFileToExport)
+        );
 
         $this->assertInstanceOf(Exporter::class, $exporter);
 
@@ -34,7 +37,6 @@ final class ExporterTest extends TestCase
         $this->assertFileExists($this->expectedRawOutput);
 
         // Erase generated raw output file
-        if (file_exists($this->expectedRawOutput)) 
-            unlink($this->expectedRawOutput);
+        unlink($this->expectedRawOutput);
     }
 }

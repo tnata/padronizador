@@ -19,67 +19,18 @@ foreach($inputFiles as $inputFile) {
         );
 
         // Execute csv conversion
-        $rawCsvPath = $exporter->run();
+        $rawFilePath = $exporter->run();
 
         // Create the conversor instance
-        $converter = Factories\ConverterFactory::create($inputFile);
+        $converter = Factories\ConverterFactory::create(
+            $inputFile,
+            $rawFilePath
+        );
 
     } catch (\Exception $e) {
         // Advance to the next file
         continue;
     }
-
-    // Execute file standardization for Superlógica import
-
-    //Get the total number of lines in the raw file
-    $fileLines = countLines($rawFilePath);
-
-    // Start field or line elimination based on standard 
-    if ($standardName == 'cadastro') {
-        $cutTop = 3; //Lines to discard at top
-        $cutBottom = 1; //Linest o discard at bottom
-
-        $concatEvery = 5; //Concatenate every X lines
-        $concatIndex = $cutTop; //Concatenation index starting point
-
-        // Get the headers values
-        $fieldsToImplode = $standard['fields'];
-    }
-
-    // Start field or line elimination based on standard 
-    if ($standardName == 'cobranca') {
-        if (Str::create($inputFile)->contains('acordo')) {
-            $mode = 'acordo';
-            $cutTop = 4; //Lines to discard at top
-            $cutBottom = 3; //Linest o discard at bottom
-    
-            $concatEvery = 2; //Concatenate every X lines
-            $concatIndex = $cutTop; //Concatenation index starting point
-        }
-
-        if (Str::create($inputFile)->contains('inadimplencia')) {
-            $mode = 'inadimplencia';
-            $cutTop = 6; //Lines to discard at top
-            $cutBottom = 0; //This mode have a end line string
-    
-            $concatEvery = 1; //This mode need to be parsed line by line
-            $concatIndex = $cutTop; //Concatenation index starting point
-        }
-
-        // Get the headers values
-        $fieldsToImplode = $standard['fields'];
-        // Add 18 dynamic fields
-        for ($i=0; $i < 18; $i++) { 
-            foreach($standard['array_fields'] as $key => $fields) {
-                foreach($fields as $field) {
-                    $fieldsToImplode[] = "[$key][$i][$field]";
-                }
-            }
-        }
-    }
-
-    // Write header to converted output file based on standard
-    fwrite($outputConverted, implode(',', $fieldsToImplode));
 
     // Line concatenation variable
     $toWrite = '';

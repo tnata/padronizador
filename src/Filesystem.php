@@ -54,12 +54,16 @@ class Filesystem
      * @return array
      * @throws \Exception when the file is not found
      **/
-    public function getLines(string $path)
+    public static function getLines(string $path) : array
     {
         if (!file_exists($path)) {
             throw new \Exception('Arquivo não encontrado!');
         }
-        $file = fread(fopen($path, 'r'), filesize($path));
+        $filesize = filesize($path);
+        if ($filesize == 0) {
+            throw new \Exception('Arquivo vazio!');
+        }
+        $file = fread(fopen($path, 'r'), $filesize);
         return explode(PHP_EOL, $file);
     }
 
@@ -67,11 +71,55 @@ class Filesystem
      * Create a file pointer to put contents
      *
      * @param string $path Path for the new file
-     * @return resource
+     * @return Resource
      * @throws \Exception when the path is inacessible
      **/
-    public function FunctionName(string $path)
+    public static function createResource(string $path)
     {
-        return fopen($path, "w");
+        // Get the output folder from config
+        $outputFolder = config('converters')->get('output_folder');
+        return fopen($outputFolder.$path, "w");
+    }
+
+    /**
+     * Write line to file resource
+     *
+     * @param Resource $file Recource file open to write
+     * @param string $line String of data to write
+     * @throws Exception when not valid resource was provided
+     **/
+    public static function writeLine($resource, string $line)
+    {
+        if (!is_resource($resource)) {
+            throw new \Exception('Recurso inválido!');
+        }
+        // Write a line to file
+        fwrite($resource, $line);
+    }
+
+    /**
+     * Close an open resource
+     *
+     * @param Resource $resource Resource to close
+     * @throws Exception when not valid resource was provided
+     **/
+    public function closeResource($resource)
+    {
+        if (!is_resource($resource)) {
+            throw new \Exception('Recurso inválido!');
+        }
+        fclose($resource);
+    }
+
+    /**
+     * Get the file info array for specified file
+     *
+     * @param string $path File path
+     * @return array
+     * @throws \Exception when not found
+     **/
+    public static function getInfo(string $path)
+    {
+        return pathinfo($path);
     }
 }
