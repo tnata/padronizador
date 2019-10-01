@@ -17,7 +17,17 @@ final class FilesystemTest extends TestCase
     {
         $this->assertEquals(
             10,
-            Standardizer\Filesystem::countLines('assets/test.txt')
+            Standardizer\Filesystem::countLines('tests/assets/test.txt')
         );
+    }
+
+    public function testCanIGetTextFileLinesArray()
+    {
+        $this->assertIsArray(
+            Standardizer\Filesystem::getLines('tests/assets/test.txt')
+        );
+
+        $this->expectException(\Exception::class);
+        Standardizer\Filesystem::getLines('invalid');
     }
 }

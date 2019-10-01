@@ -1,9 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="src" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.011221">
-    <testsuite name="FilesystemTest" file="/home/padronizador/src/FilesystemTest.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.011221">
-      <testcase name="testCanReadInputFolderRecursive" class="FilesystemTest" classname="FilesystemTest" file="/home/padronizador/src/FilesystemTest.php" line="9" assertions="1" time="0.009507"/>
-      <testcase name="testCanCountTextFileLines" class="FilesystemTest" classname="FilesystemTest" file="/home/padronizador/src/FilesystemTest.php" line="16" assertions="1" time="0.001714"/>
+  <testsuite name="src" tests="16" assertions="18" errors="0" failures="0" skipped="0" time="0.316550">
+    <testsuite name="ConverterTest" file="/home/padronizador/src/ConverterTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.010139">
+      <testcase name="testCanICreateAParentConverterInstance" class="ConverterTest" classname="ConverterTest" file="/home/padronizador/src/ConverterTest.php" line="9" assertions="1" time="0.010139"/>
+    </testsuite>
+    <testsuite name="CadastroConverterTest" file="/home/padronizador/src/Converters/CadastroConverterTest.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.012297">
+      <testcase name="testCanICreateACadastroConverterInstance" class="CadastroConverterTest" classname="CadastroConverterTest" file="/home/padronizador/src/Converters/CadastroConverterTest.php" line="9" assertions="1" time="0.010807"/>
+      <testcase name="testICanGetAValidStandardConfig" class="CadastroConverterTest" classname="CadastroConverterTest" file="/home/padronizador/src/Converters/CadastroConverterTest.php" line="22" assertions="1" time="0.001490"/>
+    </testsuite>
+    <testsuite name="CobrancaConverterTest" file="/home/padronizador/src/Converters/CobrancaConverterTest.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.003367">
+      <testcase name="testCanICreateACobrancaConverterInstance" class="CobrancaConverterTest" classname="CobrancaConverterTest" file="/home/padronizador/src/Converters/CobrancaConverterTest.php" line="9" assertions="1" time="0.002366"/>
+      <testcase name="testICanGetAValidStandardConfig" class="CobrancaConverterTest" classname="CobrancaConverterTest" file="/home/padronizador/src/Converters/CobrancaConverterTest.php" line="22" assertions="1" time="0.001001"/>
+    </testsuite>
+    <testsuite name="ExporterTest" file="/home/padronizador/src/ExporterTest.php" tests="2" assertions="3" errors="0" failures="0" skipped="0" time="0.128158">
+      <testcase name="testCanICreateAExporterFromClass" class="ExporterTest" classname="ExporterTest" file="/home/padronizador/src/ExporterTest.php" line="15" assertions="1" time="0.003755"/>
+      <testcase name="testCanIExportAXlsToCsv" class="ExporterTest" classname="ExporterTest" file="/home/padronizador/src/ExporterTest.php" line="27" assertions="2" time="0.124403"/>
+    </testsuite>
+    <testsuite name="ConverterFactoryTest" file="/home/padronizador/src/Factories/ConverterFactoryTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.002465">
+      <testcase name="testCanICreateACadastroConverterFromFactory" class="ConverterFactoryTest" classname="ConverterFactoryTest" file="/home/padronizador/src/Factories/ConverterFactoryTest.php" line="9" assertions="1" time="0.002465"/>
+    </testsuite>
+    <testsuite name="ExporterFactoryTest" file="/home/padronizador/src/Factories/ExporterFactoryTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.008491">
+      <testcase name="testCanICreateAExporterInstance" class="ExporterFactoryTest" classname="ExporterFactoryTest" file="/home/padronizador/src/Factories/ExporterFactoryTest.php" line="9" assertions="1" time="0.008491"/>
+    </testsuite>
+    <testsuite name="ReaderFactoryTest" file="/home/padronizador/src/Factories/ReaderFactoryTest.php" tests="3" assertions="3" errors="0" failures="0" skipped="0" time="0.025436">
+      <testcase name="testCanICreateAReaderInstanceForXls" class="ReaderFactoryTest" classname="ReaderFactoryTest" file="/home/padronizador/src/Factories/ReaderFactoryTest.php" line="9" assertions="1" time="0.002471"/>
+      <testcase name="testCanICreateAReaderInstanceForXlsx" class="ReaderFactoryTest" classname="ReaderFactoryTest" file="/home/padronizador/src/Factories/ReaderFactoryTest.php" line="17" assertions="1" time="0.015159"/>
+      <testcase name="testICantCreateAUnsupportedReader" class="ReaderFactoryTest" classname="ReaderFactoryTest" file="/home/padronizador/src/Factories/ReaderFactoryTest.php" line="25" assertions="1" time="0.007806"/>
+    </testsuite>
+    <testsuite name="WriterFactoryTest" file="/home/padronizador/src/Factories/WriterFactoryTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.119436">
+      <testcase name="testCanICreateAWriterInstanceForCsv" class="WriterFactoryTest" classname="WriterFactoryTest" file="/home/padronizador/src/Factories/WriterFactoryTest.php" line="9" assertions="1" time="0.119436"/>
+    </testsuite>
+    <testsuite name="FilesystemTest" file="/home/padronizador/src/FilesystemTest.php" tests="3" assertions="4" errors="0" failures="0" skipped="0" time="0.006761">
+      <testcase name="testCanReadInputFolderRecursive" class="FilesystemTest" classname="FilesystemTest" file="/home/padronizador/src/FilesystemTest.php" line="9" assertions="1" time="0.002377"/>
+      <testcase name="testCanCountTextFileLines" class="FilesystemTest" classname="FilesystemTest" file="/home/padronizador/src/FilesystemTest.php" line="16" assertions="1" time="0.002670"/>
+      <testcase name="testCanIGetTextFileLinesArray" class="FilesystemTest" classname="FilesystemTest" file="/home/padronizador/src/FilesystemTest.php" line="24" assertions="2" time="0.001714"/>
     </testsuite>
   </testsuite>
 </testsuites>

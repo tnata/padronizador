@@ -1,7 +1,9 @@
 <?php
 
+require_once('vendor/autoload.php');
+
 use Configula\ConfigFactory as Config;
 
-function config($key) {
-    return Config::loadSingleDirectory('config')[$key];
+function config($file) {
+    return Config::loadPath('config/local/'.$file.'.php');
 }

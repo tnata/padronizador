@@ -45,4 +45,33 @@ class Filesystem
         fclose($handle);
         return $linecount;
     }
+
+    /**
+     * Get the inputFile lines array
+     *
+     * @param string $path Caminho do arquivo
+     * 
+     * @return array
+     * @throws \Exception when the file is not found
+     **/
+    public function getLines(string $path)
+    {
+        if (!file_exists($path)) {
+            throw new \Exception('Arquivo não encontrado!');
+        }
+        $file = fread(fopen($path, 'r'), filesize($path));
+        return explode(PHP_EOL, $file);
+    }
+
+    /**
+     * Create a file pointer to put contents
+     *
+     * @param string $path Path for the new file
+     * @return resource
+     * @throws \Exception when the path is inacessible
+     **/
+    public function FunctionName(string $path)
+    {
+        return fopen($path, "w");
+    }
 }

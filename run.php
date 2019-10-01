@@ -1,77 +1,35 @@
 <?php
  
 // Load PhpSpreadsheet library.
-require_once('vendor/autoload.php');
 require_once('bootstrap.php');
- 
-// Import classes
-use PhpOffice\PhpSpreadsheet\IOFactory;
-use Stringy\Stringy as Str;
 
-//TODO: Put in config file
-//Define the main folder for execution
-$inputFolder = 'input/';
-$outputFolder = 'output/';
-$outputRaw = $outputFolder.'raw/';
- 
-// Read the input folder files and process it
-foreach(scanAllDir($inputFolder) as $inputFile) {
-    //VALIDATIONS
-    // Ignore main folders
-    if (in_array($inputFile, ['.', '..'])) {
+// Local classes
+use Standardizer\Filesystem;
+use Standardizer\Factories;
+
+// Get the array of files from cmd input folder
+$inputFiles = Filesystem::scanAllDir(config('cmd')->get('input_folder'));
+
+// Read the input folder files and convert them
+foreach($inputFiles as $inputFile) {
+    try {
+        // Create new exporter instance
+        $exporter = Factories\ExporterFactory::create(
+            config('cmd')->get('input_folder').$inputFile
+        );
+
+        // Execute csv conversion
+        $rawCsvPath = $exporter->run();
+
+        // Create the conversor instance
+        $converter = Factories\ConverterFactory::create($inputFile);
+
+    } catch (\Exception $e) {
+        // Advance to the next file
         continue;
-    }
-
-    // Work only in files with disired extension
-    $allowedExtensions = ['.xls', '.xlsx'];
-    if (!Str::create($inputFile)->containsAny($allowedExtensions)) {
-        continue;
-    }
-
-    // Create the pathinfo element
-    $inputFileInfo = pathinfo($inputFolder.$inputFile);
-
-    //READER FACTORY
-    //Determine the reader format by the file extension
-    switch ($inputFileInfo['extension']) {
-        case 'xls':
-            $readerFormat = "Xls";
-            break;
-        default:
-            $readerFormat = "Xlsx";
-            break;
-    }
-    // Read the file using PhpSpreadsheet
-    $reader = IOFactory::createReader($readerFormat);
-
-    //EXPORTER
-    $spreadsheet = $reader->load($inputFolder.$inputFile);
-    
-    // Export to CSV in output
-    $writer = IOFactory::createWriter($spreadsheet, "Csv")
-    ->setSheetIndex(0)   // Select which sheet to export.
-    ->setDelimiter(',');  // Set delimiter.
-    
-    $outputFile = str_replace($inputFileInfo['extension'], 'csv', $inputFile);
-    // Save raw conversion output
-    $rawFilePath = $outputRaw.basename($outputFile);
-    $writer->save($rawFilePath);
-
-    //CONVERSOR
-    // Define the standard for conversion
-    $standardName = 'cadastro';
-    if (Str::create($inputFile)->contains('cobranca')) {
-        $standardName = 'cobranca';
     }
 
     // Execute file standardization for Superlógica import
-    $csvFileContent = fread(fopen($rawFilePath, 'r'), filesize($rawFilePath));
-
-    // Bind standard attributes from config
-    $standard = config('standards')[$standardName];
-
-    // Create file for converted output
-    $outputConverted = fopen($outputFolder.basename($outputFile), "w");
 
     //Get the total number of lines in the raw file
     $fileLines = countLines($rawFilePath);

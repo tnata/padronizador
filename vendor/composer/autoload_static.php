@@ -188,6 +188,12 @@ class ComposerStaticInitf2bfe798000280a86d3f305c24efdbae
     );
 
     public static $classMap = array (
+        'CadastroConverterTest' => __DIR__ . '/../..' . '/src/Converters/CadastroConverterTest.php',
+        'CobrancaConverterTest' => __DIR__ . '/../..' . '/src/Converters/CobrancaConverterTest.php',
+        'ConverterFactoryTest' => __DIR__ . '/../..' . '/src/Factories/ConverterFactoryTest.php',
+        'ConverterTest' => __DIR__ . '/../..' . '/src/ConverterTest.php',
+        'ExporterFactoryTest' => __DIR__ . '/../..' . '/src/Factories/ExporterFactoryTest.php',
+        'ExporterTest' => __DIR__ . '/../..' . '/src/ExporterTest.php',
         'FilesystemTest' => __DIR__ . '/../..' . '/src/FilesystemTest.php',
         'PHPUnit\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert.php',
@@ -645,6 +651,7 @@ class ComposerStaticInitf2bfe798000280a86d3f305c24efdbae
         'PharIo\\Version\\VersionConstraintParser' => __DIR__ . '/..' . '/phar-io/version/src/VersionConstraintParser.php',
         'PharIo\\Version\\VersionConstraintValue' => __DIR__ . '/..' . '/phar-io/version/src/VersionConstraintValue.php',
         'PharIo\\Version\\VersionNumber' => __DIR__ . '/..' . '/phar-io/version/src/VersionNumber.php',
+        'ReaderFactoryTest' => __DIR__ . '/../..' . '/src/Factories/ReaderFactoryTest.php',
         'SebastianBergmann\\CodeCoverage\\CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
         'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
         'SebastianBergmann\\CodeCoverage\\Driver\\Driver' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Driver/Driver.php',
@@ -757,10 +764,16 @@ class ComposerStaticInitf2bfe798000280a86d3f305c24efdbae
         'SebastianBergmann\\Type\\UnknownType' => __DIR__ . '/..' . '/sebastian/type/src/UnknownType.php',
         'SebastianBergmann\\Type\\VoidType' => __DIR__ . '/..' . '/sebastian/type/src/VoidType.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
-        'Standardizer\\Conversor' => __DIR__ . '/../..' . '/src/Conversor.php',
+        'Standardizer\\Converter' => __DIR__ . '/../..' . '/src/Converter.php',
+        'Standardizer\\Converters\\CadastroConverter' => __DIR__ . '/../..' . '/src/Converters/CadastroConverter.php',
+        'Standardizer\\Converters\\CobrancaConverter' => __DIR__ . '/../..' . '/src/Converters/CobrancaConverter.php',
+        'Standardizer\\Exporter' => __DIR__ . '/../..' . '/src/Exporter.php',
+        'Standardizer\\Factories\\ConverterFactory' => __DIR__ . '/../..' . '/src/Factories/ConverterFactory.php',
+        'Standardizer\\Factories\\ExporterFactory' => __DIR__ . '/../..' . '/src/Factories/ExporterFactory.php',
+        'Standardizer\\Factories\\ReaderFactory' => __DIR__ . '/../..' . '/src/Factories/ReaderFactory.php',
+        'Standardizer\\Factories\\WriterFactory' => __DIR__ . '/../..' . '/src/Factories/WriterFactory.php',
         'Standardizer\\Filesystem' => __DIR__ . '/../..' . '/src/Filesystem.php',
-        'Standardizer\\Interfaces\\Parser' => __DIR__ . '/../..' . '/src/Interfaces/Parser.php',
-        'Standardizer\\Translators\\Cobranca\\CobrancaTranslator' => __DIR__ . '/../..' . '/src/Parsers/Cadastro.php',
+        'Standardizer\\Interfaces\\ConverterInterface' => __DIR__ . '/../..' . '/src/Interfaces/ConverterInterface.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
         'TheSeer\\Tokenizer\\Exception' => __DIR__ . '/..' . '/theseer/tokenizer/src/Exception.php',
         'TheSeer\\Tokenizer\\NamespaceUri' => __DIR__ . '/..' . '/theseer/tokenizer/src/NamespaceUri.php',
@@ -770,6 +783,7 @@ class ComposerStaticInitf2bfe798000280a86d3f305c24efdbae
         'TheSeer\\Tokenizer\\TokenCollectionException' => __DIR__ . '/..' . '/theseer/tokenizer/src/TokenCollectionException.php',
         'TheSeer\\Tokenizer\\Tokenizer' => __DIR__ . '/..' . '/theseer/tokenizer/src/Tokenizer.php',
         'TheSeer\\Tokenizer\\XMLSerializer' => __DIR__ . '/..' . '/theseer/tokenizer/src/XMLSerializer.php',
+        'WriterFactoryTest' => __DIR__ . '/../..' . '/src/Factories/WriterFactoryTest.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
