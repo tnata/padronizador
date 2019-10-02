@@ -8,10 +8,10 @@ class Filesystem
     /**
      * Scan a folder recursively and return an array of elements
      *
-     * @param String $dir
+     * @param string $dir Directory to scan
      * @return array
      */
-    public static function scanAllDir($dir) : array
+    public static function scanAllDir(string $dir) : array
     {
         $result = [];
         foreach(scandir($dir) as $filename) {
@@ -31,10 +31,10 @@ class Filesystem
     /**
      * Cunts the number of lines in a text file
      *
-     * @param String $file
+     * @param string $file File to count lines
      * @return integer
      */
-    public static function countLines($file) : int
+    public static function countLines(string $file) : int
     {
         $linecount = 0;
         $handle = fopen($file, "r");
@@ -64,7 +64,9 @@ class Filesystem
             throw new \Exception('Arquivo vazio!');
         }
         $file = fread(fopen($path, 'r'), $filesize);
-        return explode(PHP_EOL, $file);
+
+        // Convert content to ISO-8859-1 compatible and explode
+        return explode(PHP_EOL, utf8_decode($file));
     }
 
     /**

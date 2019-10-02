@@ -1,15 +1,21 @@
 <?php namespace Standardizer;
 
+use Standardizer\Factories\WriterFactory;
+use Standardizer\Factories\ReaderFactory;
+
 /**
  * Create a new standardizer exporter object
  */
 class Exporter
 {
     // Properties
-    private $inputFilePath;
-    private $inputFileInfo;
+    protected $inputFilePath;
+    protected $inputFileInfo;
 
-    private $config;
+    protected $outputFilePath;
+    protected $rawFilePath;
+
+    protected $config;
 
     /**
      * Class constructor.
@@ -22,39 +28,57 @@ class Exporter
         $this->inputFilePath = $inputFilePath;
         // Get file info from file path
         $this->inputFileInfo = Filesystem::getInfo($inputFilePath);
+
+        // Create the output file path
+        $this->outputFilePath = str_replace(
+            $this->inputFileInfo['extension'],
+            $this->config->get('output_type'),
+            $this->inputFilePath
+        );
+
+        // Create the raw file path
+        $this->rawFilePath = $this->config->get('raw_folder').basename($this->outputFilePath);
     }
 
     /**
      * Run execute the exporter instance and generates output
      *
-     * @return string
+     * @return void
      */
-    public function run() : string
+    public function run() : void
     {
         // Create the reader
-        $reader = Factories\ReaderFactory::create(
+        $reader = ReaderFactory::create(
             $this->inputFileInfo['extension']
         );
 
         // Load imput file to reader
         $spreadsheet = $reader->load($this->inputFilePath);
 
-        // Create the output file path
-        $outputFilePath = str_replace(
-            $this->inputFileInfo['extension'],
-            $this->config->get('output_type'),
-            $this->inputFilePath
-        );
         // Create the writer factory instance
-        $writer = Factories\WriterFactory::create($spreadsheet, $outputFilePath);
-
-        // Create the raw file path
-        $rawFilePath = $this->config->get('raw_folder').basename($outputFilePath);
+        $writer = WriterFactory::create($spreadsheet, $this->outputFilePath);
 
         // Save raw conversion output
-        $writer->save($rawFilePath);
+        $writer->save($this->rawFilePath);
+    }
 
-        // Return the generated csv path
-        return $rawFilePath;
+    /**
+     * Get the input file path
+     *
+     * @return string The path to input file informed
+     **/
+    public function getInputFilePath()
+    {
+        return $this->inputFilePath;
+    }
+
+    /**
+     * Get the raw file path
+     *
+     * @return string The path to the raw file that exporter generates
+     **/
+    public function getRawFilePath()
+    {
+        return $this->rawFilePath;
     }
 }

@@ -10,6 +10,8 @@ use Standardizer\Converter;
 final class CadastroConverterTest extends TestCase
 {
     private $fileToConvert = 'cadastro.xls';
+    private $fileToConvertUniondata = 'tests/assets/cadastro/uniondata/cadastro.xls';
+    private $fileToConvertCarsoft = 'tests/assets/cadastro/carsoft/cadastro.xls';
     private $testFile = 'tests/assets/test.txt';
     private $rawFile;
 
@@ -42,12 +44,19 @@ final class CadastroConverterTest extends TestCase
     /**
      * @depends testCanICreateACadastroConverterInstance
      */
+    public function testCanIGetAValidDelimiterConfig(CadastroConverter $converter)
+    {
+        $this->assertIsString($converter->getDelimiter());
+    }
+
+    /**
+     * @depends testCanICreateACadastroConverterInstance
+     */
     public function testICanAccessAllGettersValuesForCadastro(CadastroConverter $converter)
     {
         $this->assertIsInt($converter->getCutTop());
         $this->assertIsInt($converter->getCutBottom());
         $this->assertIsInt($converter->getConcatEvery());
-        $this->assertIsInt($converter->getConcatIndex());
         $this->assertIsArray($converter->getFieldsToImplode());
     }
 
@@ -57,5 +66,12 @@ final class CadastroConverterTest extends TestCase
             $this->fileToConvert, 
             $this->rawFile
         ));
+    }
+
+    public function testCanIGetAParsedLinesForCadastroUniondata(): void
+    {
+        
+
+
     }
 }

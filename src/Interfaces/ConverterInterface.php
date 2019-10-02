@@ -1,26 +1,15 @@
 <?php namespace Standardizer\Interfaces;
 
-interface ConverterInterface {
-    /**
-     * Execute conversion
-     *
-     * @return bool
-     */
-    public function run() : bool;
-
-    public function getCutTop() : int; // Lines to discard at top
-    public function getCutBottom() : int; // Linest o discard at bottom
-    public function getConcatEvery() : int; // Concatenate every X lines
-    public function getConcatIndex() : int; // Concatenation index starting point
+interface ConverterInterface 
+{
+    // Configuration Getters
     public function getFieldsToImplode(): array; // Get the headers values for output
 
-
     /**
-     * Function that implements the content parser
+     * Implements the converter logic
      *
-     * @param array $content Content to be parsed
-     * @return type
-     * @throws conditon
+     * @param array $lines Lines to be parsed
+     * @return array $lines Lines after parsing
      **/
-    public function parser() : array;
+    public function convertLines(array $lines) : array;
 }

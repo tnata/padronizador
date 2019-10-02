@@ -7,8 +7,12 @@ use Standardizer\Exporter;
  */
 class ExporterFactory
 {
-    public static function create($inputFile)
+    public static function create($inputFilePath)
     {
-        return new Exporter($inputFile);
+        if (!file_exists($inputFilePath)) {
+            throw new \Exception('Arquivo de input não encontrado!');
+        }
+
+        return new Exporter($inputFilePath);
     }
 }

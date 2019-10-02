@@ -37,6 +37,14 @@ final class CobrancaConverterTest extends TestCase
     {
         $this->assertArrayHasKey('fields', $converter->getStandard());
     }
+
+    /**
+     * @depends testCanICreateACobrancaConverterInstance
+     */
+    public function testCanIGetAValidDelimiterConfig(CobrancaConverter $converter)
+    {
+        $this->assertIsString($converter->getDelimiter());
+    }
     
     /**
      * @depends testCanICreateACobrancaConverterInstance
@@ -73,7 +81,6 @@ final class CobrancaConverterTest extends TestCase
         $this->assertIsInt($converter->getCutTop());
         $this->assertIsInt($converter->getCutBottom());
         $this->assertIsInt($converter->getConcatEvery());
-        $this->assertIsInt($converter->getConcatIndex());
         $this->assertIsArray($converter->getFieldsToImplode());
     }
 

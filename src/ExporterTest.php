@@ -27,16 +27,32 @@ final class ExporterTest extends TestCase
     /**
      * @depends testCanICreateAExporterFromClass
      */
+    public function testCanIGetTheInputFilePath(Exporter $exporter) : void
+    {
+        $this->assertEquals($this->emptyFileToExport, $exporter->getInputFilePath());
+    }
+
+
+    /**
+     * @depends testCanICreateAExporterFromClass
+     */
+    public function testCanIGetTheRawFilePath(Exporter $exporter) : void
+    {
+        $this->assertEquals($this->expectedRawOutput, $exporter->getRawFilePath());
+    }
+
+    /**
+     * @depends testCanICreateAExporterFromClass
+     */
     public function testCanIExportAXlsToCsv(Exporter $exporter) : void
     {
-        $this->assertStringContainsString(
-            $this->expectedRawOutput,
-            $exporter->run()
-        );
+        $exporter->run();
 
         $this->assertFileExists($this->expectedRawOutput);
 
         // Erase generated raw output file
         unlink($this->expectedRawOutput);
     }
+
+
 }

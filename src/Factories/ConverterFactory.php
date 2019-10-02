@@ -1,26 +1,40 @@
 <?php namespace Standardizer\Factories;
 
-use Standardizer\Converter;
+use Stringy\Stringy as Str;
+
+use Standardizer\Exporter;
+use Standardizer\Interfaces\ConverterInterface;
 
 /**
  * Exporter factory
  */
 class ConverterFactory
 {
-    public static function create(string $inputFilePath, string $rawFilePath)
+    public static function create(Exporter $exporter) : ConverterInterface
     {
-        // Get the converter config
-        $config = Converter::getConfig($inputFilePath);
+        // Get the converter type by parsing the exporter inputFilePath
+        foreach(config('converters')->get('available') as $type) {
+            dump($type);
 
-        if (!isset($config['class'])) {
+            dump($exporter->getInputFilePath());
+
+            if (Str::create($exporter->getInputFilePath())->contains($type)) {
+                $converterType = $type;
+            }
+        }
+
+        // Check if a valid converter was found
+        if (!isset($converterType)) {
             throw new \Exception('Conversor não implementado!');
         }
 
-        if (!file_exists($rawFilePath)) {
-            throw new \Exception('Arquivo raw não encontrado!');
-        }
+        // Create the parser for injection
+        $parser = ParserFactory::create($exporter);
 
-        $class = 'Standardizer\\Converters\\'.$config['class'];
-        return new $class($inputFilePath, $rawFilePath);
+        // Define the converter class by type
+        $class = 'Standardizer\\Converters\\'.ucfirst($converterType).'Converter';
+
+        // Instantiate new converter
+        return new $class($parser);
     }
 }

@@ -8,48 +8,26 @@ use Standardizer\Interfaces\ConverterInterface;
  */
 class CadastroConverter extends Converter implements ConverterInterface
 {
-    /**
-     * Execute the conversor and generates output
-     *
-     * @param Type $var Description
-     * @return bool
-     * @throws conditon
-     **/
-    public function run() : bool
-    {
-        // Create file for converted output
-        $this->outputFile = Filesystem::createResource(
-            $this->outputFolder.basename($this->outputFilePath)
-        );
-
-        // Get the lines from input file
-        $lines = Filesystem::getLines($this->inputFilePath);
-
-        //Get the total number of lines in the raw file
-        $fileLines = countLines($this->inputFilePath);
-
-        return true;
-    }
-
-    public function getCutTop(): int { return $this->config['defaults']['cut_top']; }
-    public function getCutBottom(): int { return $this->config['defaults']['cut_bottom']; }
-    public function getConcatEvery(): int { return $this->config['defaults']['concat_every']; }
-    public function getConcatIndex() : int { return $this->getCutTop(); }
+    // Configuration Getters
     public function getFieldsToImplode(): array { 
-        return $this->getStandard()['fields']; 
+        return $this->standard['fields']; 
     }
 
-    /**
-     * Function that implements the content parser
+       /**
+     * Implements the converter logic
      *
-     * @param array $content Content to be parsed
-     * @return type
-     * @throws conditon
+     * @param array $lines Lines to be parsed
+     * @return array $lines Lines after parsing
      **/
-    public function parser() : array
+    public function convertLines(array $lines) : array
     {
-        //
+        $parsedLines = [];
 
-        return [];
+        foreach($lines as $lineText)
+        {   
+            $parsedLines[] = $this->parser->parseLine($lineText);
+        }
+
+        return $parsedLines;
     }
 }

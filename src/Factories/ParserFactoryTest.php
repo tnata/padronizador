@@ -3,9 +3,10 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
+
 use Standardizer\Factories\ExporterFactory;
 
-final class ConverterFactoryTest extends TestCase
+final class ParserFactoryTest extends TestCase
 {
     private $uniondataCadastroExporter;
     private $uniondataDefaultCobrancaExporter;
@@ -23,28 +24,28 @@ final class ConverterFactoryTest extends TestCase
             'tests/assets/uniondata/acordos.xls'
         );
     }
-
-    public function testCanICreateAUniondataDefaultCadastroConverterFromFactory(): void
+    
+    public function testCanICreateAUniondataDefaultCadastroParserInstance(): void
     {
         $this->assertInstanceOf(
-            Standardizer\Converters\CadastroConverter::class,
-            Standardizer\Factories\ConverterFactory::create($this->uniondataCadastroExporter)
+            Standardizer\Parsers\UniondataParser::class,
+            Standardizer\Factories\ParserFactory::create($this->uniondataCadastroExporter)
         );
     }
 
-    public function testCanICreateAUniondataDefaultCobrancaConverterFromFactory(): void
+    public function testCanICreateAUniondataDefaultCobrancaParserInstance(): void
     {
         $this->assertInstanceOf(
-            Standardizer\Converters\CobrancaConverter::class,
-            Standardizer\Factories\ConverterFactory::create($this->uniondataDefaultCobrancaExporter)
+            Standardizer\Parsers\UniondataParser::class,
+            Standardizer\Factories\ParserFactory::create($this->uniondataDefaultCobrancaExporter)
         );
     }
 
-    public function testCanICreateAUniondataAcordoCobrancaConverterFromFactory(): void
+    public function testCanICreateAUniondataAcordoCobrancaParserInstance(): void
     {
         $this->assertInstanceOf(
-            Standardizer\Converters\CobrancaConverter::class,
-            Standardizer\Factories\ConverterFactory::create($this->uniondataAcordoCobrancaExporter)
+            Standardizer\Parsers\UniondataParser::class,
+            Standardizer\Factories\ParserFactory::create($this->uniondataAcordoCobrancaExporter)
         );
     }
 }
