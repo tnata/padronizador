@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="ConverterFactoryTest" file="/home/padronizador/src/Factories/ConverterFactoryTest.php" tests="2" assertions="1" errors="1" failures="0" skipped="0" time="0.051094">
-    <testcase name="testCanICreateAUniondataDefaultCadastroConverterFromFactory" class="ConverterFactoryTest" classname="ConverterFactoryTest" file="/home/padronizador/src/Factories/ConverterFactoryTest.php" line="27" assertions="1" time="0.043962"/>
-    <testcase name="testCanICreateAUniondataDefaultCobrancaConverterFromFactory" class="ConverterFactoryTest" classname="ConverterFactoryTest" file="/home/padronizador/src/Factories/ConverterFactoryTest.php" line="35" assertions="0" time="0.007132">
-      <error type="Exception">ConverterFactoryTest::testCanICreateAUniondataDefaultCobrancaConverterFromFactory
-Exception: Conversor n?o implementado!
-
-/home/padronizador/src/Factories/ConverterFactory.php:28
-/home/padronizador/src/Factories/ConverterFactoryTest.php:39
-</error>
-    </testcase>
+  <testsuite name="ConverterFactoryTest" file="/home/padronizador/src/Factories/ConverterFactoryTest.php" tests="3" assertions="3" errors="0" failures="0" skipped="0" time="0.041156">
+    <testcase name="testCanICreateAUniondataDefaultCadastroConverterFromFactory" class="ConverterFactoryTest" classname="ConverterFactoryTest" file="/home/padronizador/src/Factories/ConverterFactoryTest.php" line="27" assertions="1" time="0.026693"/>
+    <testcase name="testCanICreateAUniondataDefaultCobrancaConverterFromFactory" class="ConverterFactoryTest" classname="ConverterFactoryTest" file="/home/padronizador/src/Factories/ConverterFactoryTest.php" line="35" assertions="1" time="0.006231"/>
+    <testcase name="testCanICreateAUniondataAcordoCobrancaConverterFromFactory" class="ConverterFactoryTest" classname="ConverterFactoryTest" file="/home/padronizador/src/Factories/ConverterFactoryTest.php" line="43" assertions="1" time="0.008232"/>
   </testsuite>
 </testsuites>

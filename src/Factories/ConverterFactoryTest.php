@@ -14,13 +14,13 @@ final class ConverterFactoryTest extends TestCase
     protected function setUp() : void
     {
         $this->uniondataCadastroExporter = ExporterFactory::create(
-            'tests/assets/uniondata/cadastro.xls'
+            'tests/assets/uniondata/cadastro/default/cadastro.xls'
         );
         $this->uniondataDefaultCobrancaExporter = ExporterFactory::create(
-            'tests/assets/uniondata/inadimplencia.xls'
+            'tests/assets/uniondata/cobranca/default/inadimplencia.xls'
         ); 
         $this->uniondataAcordoCobrancaExporter = ExporterFactory::create(
-            'tests/assets/uniondata/acordos.xls'
+            'tests/assets/uniondata/cobranca/acordo/acordos.xls'
         );
     }
 

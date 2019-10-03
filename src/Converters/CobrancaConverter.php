@@ -8,11 +8,6 @@ use Standardizer\Interfaces\ConverterInterface;
  */
 class CobrancaConverter extends Converter implements ConverterInterface
 {
-    private $subtype;
-
-    public function getCutTop(): int { return $this->subtype['defaults']['cut_top'];; }
-    public function getCutBottom(): int { return $this->subtype['defaults']['cut_bottom'];; }
-    public function getConcatEvery(): int { return $this->subtype['defaults']['concat_every']; }
     public function getFieldsToImplode(): array {
         $fieldsToImplode = $this->getStandard()['fields'];
         // Add 18 dynamic fields
@@ -25,5 +20,23 @@ class CobrancaConverter extends Converter implements ConverterInterface
         }
 
         return $fieldsToImplode;
+    }
+
+     /**
+     * Implements the converter logic
+     *
+     * @param array $lines Lines to be parsed
+     * @return array $lines Lines after parsing
+     **/
+    public function convertLines(array $lines) : array
+    {
+        $parsedLines = [];
+
+        foreach($lines as $lineText)
+        {   
+            $parsedLines[] = $this->parser->parseLine($lineText);
+        }
+
+        return $parsedLines;
     }
 }

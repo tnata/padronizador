@@ -14,10 +14,6 @@ class ConverterFactory
     {
         // Get the converter type by parsing the exporter inputFilePath
         foreach(config('converters')->get('available') as $type) {
-            dump($type);
-
-            dump($exporter->getInputFilePath());
-
             if (Str::create($exporter->getInputFilePath())->contains($type)) {
                 $converterType = $type;
             }
